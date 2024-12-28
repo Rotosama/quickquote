@@ -1,26 +1,7 @@
 "use client";
-import { Geist, Geist_Mono, Monomaniac_One } from "next/font/google";
-import "./globals.css";
-import { useEffect, useState } from "react";
-import DarkModeToggle from "./components/DarkModeToogle";
+import { useState, useEffect } from "react";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
-
-const monomaniacOne = Monomaniac_One({
-	variable: "--font-monomaniac-one",
-	subsets: ["latin"],
-	weight: "400",
-});
-
-export default function RootLayout({ children }) {
+export default function DarkModeToggle() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
 
 	useEffect(() => {
@@ -50,19 +31,23 @@ export default function RootLayout({ children }) {
 	useEffect(() => {
 		if (isDarkMode) {
 			document.documentElement.classList.add("dark");
+			localStorage.setItem("theme", "dark");
 		} else {
 			document.documentElement.classList.remove("dark");
+			localStorage.setItem("theme", "light");
 		}
 	}, [isDarkMode]);
 
 	return (
-		<html lang="en" className={isDarkMode ? "dark" : ""}>
-			<body
-				className={`${geistSans.variable} ${monomaniacOne.variable} antialiased`}
-			>
-				<DarkModeToggle />
-				{children}
-			</body>
-		</html>
+		<button
+			onClick={() => setIsDarkMode((prevMode) => !prevMode)}
+			className="p-2 rounded bg-blue-500 text-white dark:bg-gray-600"
+		>
+			<img
+				src={isDarkMode ? "/icons/sun.png" : "/icons/moon.png"}
+				alt={isDarkMode ? "Light Mode" : "Dark Mode"}
+				className="w-6 h-6"
+			/>
+		</button>
 	);
 }
