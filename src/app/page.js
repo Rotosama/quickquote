@@ -4,6 +4,7 @@ import { useState } from "react";
 import LineForm from "./components/LineForm";
 import InvoiceTable from "./components/InvoiceTable";
 import CommentForm from "./components/CommentForm";
+import DarkModeToggle from "./components/DarkModeToogle";
 
 export default function Home() {
 	const [lines, setLines] = useState([]);
@@ -18,6 +19,9 @@ export default function Home() {
 
 	return (
 		<>
+			<div className="flex justify-center p-4">
+				<DarkModeToggle />
+			</div>
 			<div className="flex flex-col lg:flex-row p-4">
 				{/* Left Side: Form to add lines */}
 				<div className="justify-center items-center w-full lg:w-1/2 p-4">
