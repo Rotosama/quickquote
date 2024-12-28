@@ -5,6 +5,7 @@ import LineForm from "./components/LineForm";
 import InvoiceTable from "./components/InvoiceTable";
 import CommentForm from "./components/CommentForm";
 import DarkModeToggle from "./components/DarkModeToogle";
+import ClearTableButton from "./components/ClearTableButton";
 
 export default function Home() {
 	const [lines, setLines] = useState([]);
@@ -16,7 +17,9 @@ export default function Home() {
 	const addComment = (comment) => {
 		setLines([...lines, { description: comment, isComment: true }]);
 	};
-
+	const clearTable = () => {
+		setLines([]);
+	};
 	return (
 		<>
 			<div className="flex justify-center p-4">
@@ -27,6 +30,7 @@ export default function Home() {
 				<div className="justify-center items-center w-full lg:w-1/2 p-4">
 					<CommentForm onAddComment={addComment} />
 					<LineForm onAddLine={addLine} />
+					<ClearTableButton onClear={clearTable} />
 				</div>
 
 				{/* Right Side: Invoice Preview */}

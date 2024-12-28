@@ -21,7 +21,7 @@ export default function LineForm({ onAddLine }) {
 		<div>
 			<button
 				onClick={() => setIsFormVisible(!isFormVisible)}
-				className="bg-blue-500 text-white px-4 py-2 rounded"
+				className="bg-blue-500 text-white px-4 py-2 mb-2 rounded"
 			>
 				{isFormVisible ? "Cancel" : "Add Line"}
 			</button>
