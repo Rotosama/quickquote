@@ -13,8 +13,8 @@ export default function InvoiceTable({ lines }) {
 			{lines.map((line, index) => (
 				<div
 					key={index}
-					className={`flex justify-between border-b py-2 ${
-						line.isComment ? "bg-yellow-100" : ""
+					className={`flex justify-between border-b py-2 ml-2 p-10 ${
+						line.isComment ? "bg-yellow-100 p-1" : ""
 					}`}
 				>
 					<div>
@@ -31,7 +31,7 @@ export default function InvoiceTable({ lines }) {
 									Quantity: {line.quantity}
 								</p>
 								<p className="text-sm text-gray-500">
-									Price: ${line.price.toFixed(2)}
+									Price: {line.price.toFixed(2)} €
 								</p>
 							</>
 						)}
@@ -39,7 +39,7 @@ export default function InvoiceTable({ lines }) {
 					{!line.isComment && (
 						<div className="text-right">
 							<p className="font-bold">
-								${(line.quantity * line.price).toFixed(2)}
+								{(line.quantity * line.price).toFixed(2)} €
 							</p>
 						</div>
 					)}
@@ -47,7 +47,7 @@ export default function InvoiceTable({ lines }) {
 			))}
 			<div className="mt-4 text-right">
 				<h2 className="text-lg font-bold">
-					Total: ${calculateTotal().toFixed(2)}
+					Total: {calculateTotal().toFixed(2)} €
 				</h2>
 			</div>
 		</div>
