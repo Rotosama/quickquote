@@ -1,5 +1,4 @@
 "use client";
-import ExportPDFButton from "./ExportPDFButton";
 import DeleteLineButton from "./DeleteLineButton";
 
 export default function InvoiceTable({ lines, onDeleteLine }) {
@@ -19,13 +18,13 @@ export default function InvoiceTable({ lines, onDeleteLine }) {
 				{lines.map((line, index) => (
 					<div
 						key={index}
-						className={`flex justify-between border-b py-2 ml-2 p-10 ${
+						className={`flex justify-between items-center border-b py-2 ml-2 p-10 ${
 							line.isComment
 								? "bg-yellow-100 p-1 dark:bg-teal-800 border-none"
 								: ""
 						}`}
 					>
-						<div>
+						<div className="flex-1">
 							<p
 								className={`font-bold ${
 									line.isComment
@@ -37,28 +36,33 @@ export default function InvoiceTable({ lines, onDeleteLine }) {
 							</p>
 							{!line.isComment && (
 								<>
-									<p className="text-sm text-gray-500">
+									<p className="text-sm text-gray-500 dark:text-gray-400">
 										Quantity: {line.quantity}
 									</p>
-									<p className="text-sm text-gray-500">
-										Price: {line.price.toFixed(2)} €
+									<p className="text-sm text-gray-500 dark:text-gray-400">
+										Price:
+										{line.price === 0 ? (
+											<span className="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 mx-3 rounded-full">
+												Free
+											</span>
+										) : (
+											`${line.price.toFixed(2)} €`
+										)}
 									</p>
 								</>
 							)}
 						</div>
 						{!line.isComment && (
-							<div className="text-right">
+							<div className="flex items-center space-x-2">
 								<p className="font-bold">
 									{(line.quantity * line.price).toFixed(2)} €
 								</p>
+								<DeleteLineButton
+									line={line}
+									onDelete={onDeleteLine}
+								/>
 							</div>
 						)}
-						<div className="flex space-x-2">
-							<DeleteLineButton
-								line={line}
-								onDelete={onDeleteLine}
-							/>
-						</div>
 					</div>
 				))}
 				<div className="mt-4 text-right">

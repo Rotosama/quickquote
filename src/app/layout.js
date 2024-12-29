@@ -1,5 +1,5 @@
 "use client";
-import { Geist, Geist_Mono, Monomaniac_One } from "next/font/google";
+import { Geist, Roboto } from "next/font/google";
 import "./globals.css";
 import { useEffect, useState } from "react";
 
@@ -8,13 +8,8 @@ const geistSans = Geist({
 	subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
-
-const monomaniacOne = Monomaniac_One({
-	variable: "--font-monomaniac-one",
+const roboto = Roboto({
+	variable: "--font-roboto",
 	subsets: ["latin"],
 	weight: "400",
 });
@@ -57,7 +52,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en" className={isDarkMode ? "dark" : ""}>
 			<body
-				className={`${geistSans.variable} ${monomaniacOne.variable} antialiased`}
+				className={`${geistSans.variable} ${roboto.variable} antialiased`}
 			>
 				{children}
 			</body>

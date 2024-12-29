@@ -4,18 +4,18 @@
 
 :root {
 	--background: #efefef;
-	--foreground: #383838;
-	--font-monomaniac-one: "Monomaniac One", sans-serif;
+	--foreground: #0a081f;
+	--font-roboto: "Roboto", sans-serif;
 }
 
 body {
 	color: var(--foreground);
 	background: var(--background);
-	font-family: var(--font-monomaniac-one);
+	font-family: var(--font-roboto);
 }
 
 html.dark {
-	--background: #080427;
+	--background: #0a081f;
 	--foreground: #d5d5db;
 }
 
@@ -24,10 +24,6 @@ input {
 	color: var(--foreground);
 }
 
-body {
-	color: var(--foreground);
-	background: var(--background);
-}
 .icon-delete {
 	fill: red;
 	color: red;
