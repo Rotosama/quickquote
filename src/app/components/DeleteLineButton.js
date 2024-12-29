@@ -4,9 +4,9 @@ export default function DeleteLineButton({ line, onDelete }) {
 	return (
 		<button
 			onClick={() => onDelete(line)}
-			className="bg-red-500 text-white px-4 py-2 rounded mb-2"
+			className="delete-button px-4 py-2 rounded mb-2"
 		>
-			Delete
+			<img src="/icons/trash.png" alt="delete" className="w-5 h-5"></img>
 		</button>
 	);
 }

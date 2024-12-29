@@ -4,6 +4,10 @@ import html2pdf from "html2pdf.js";
 export default function ExportPDFButton({ elementId, fileName }) {
 	const exportPDF = () => {
 		const element = document.getElementById(elementId);
+		const deleteButtons = element.querySelectorAll(".delete-button");
+
+		deleteButtons.forEach((button) => (button.style.display = "none"));
+
 		const opt = {
 			margin: 1,
 			filename: fileName,
@@ -11,7 +15,16 @@ export default function ExportPDFButton({ elementId, fileName }) {
 			html2canvas: { scale: 2 },
 			jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
 		};
-		html2pdf().from(element).set(opt).save();
+
+		html2pdf()
+			.from(element)
+			.set(opt)
+			.save()
+			.then(() => {
+				deleteButtons.forEach(
+					(button) => (button.style.display = "block")
+				);
+			});
 	};
 
 	return (
