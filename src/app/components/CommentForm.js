@@ -18,7 +18,7 @@ export default function CommentForm({ onAddComment }) {
 		<div className="mb-4">
 			<button
 				onClick={() => setIsFormVisible(!isFormVisible)}
-				className="bg-yellow-500 text-white px-4 py-2 rounded"
+				className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-100 bg-gray-300 dark:bg-gray-600 text-black dark:text-white px-4 py-2 mb-2 rounded-full"
 			>
 				{isFormVisible ? "Cancel" : "Add Comment"}
 			</button>
@@ -34,7 +34,7 @@ export default function CommentForm({ onAddComment }) {
 					/>
 					<button
 						type="submit"
-						className="bg-yellow-500 text-white px-4 py-2 rounded animate-pulse"
+						className="bg-yellow-600 dark:bg-teal-600 text-black dark:text-white px-4 py-2 rounded animate-pulse"
 					>
 						Add Comment
 					</button>

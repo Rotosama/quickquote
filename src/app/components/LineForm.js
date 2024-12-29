@@ -21,7 +21,7 @@ export default function LineForm({ onAddLine }) {
 		<div>
 			<button
 				onClick={() => setIsFormVisible(!isFormVisible)}
-				className="bg-blue-500 text-white px-4 py-2 mb-2 rounded"
+				className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-100 bg-gray-300 dark:bg-gray-600 text-black dark:text-white px-4 py-2 mb-2 rounded-full"
 			>
 				{isFormVisible ? "Cancel" : "Add Line"}
 			</button>
@@ -55,7 +55,7 @@ export default function LineForm({ onAddLine }) {
 					/>
 					<button
 						type="submit"
-						className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+						className="bg-gray-300 dark:bg-gray-600 text-black dark:text-white px-4 py-2 rounded mt-3 animate-pulse"
 					>
 						Add Line
 					</button>

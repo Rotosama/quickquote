@@ -6,6 +6,7 @@ import InvoiceTable from "./components/InvoiceTable";
 import CommentForm from "./components/CommentForm";
 import DarkModeToggle from "./components/DarkModeToogle";
 import ClearTableButton from "./components/ClearTableButton";
+import ExportPDFButton from "./components/ExportPDFButton";
 
 export default function Home() {
 	const [lines, setLines] = useState([]);
@@ -34,13 +35,18 @@ export default function Home() {
 				<div className="justify-center items-center w-full lg:w-1/2 p-4">
 					<CommentForm onAddComment={addComment} />
 					<LineForm onAddLine={addLine} />
-					<ClearTableButton onClear={clearTable} />
 				</div>
 
 				{/* Right Side: Invoice Preview */}
 				<div className="w-full lg:w-1/2 p-4">
 					<h1 className="text-2xl font-bold mb-4">Invoice</h1>
 					<InvoiceTable lines={lines} onDeleteLine={deleteLine} />
+					{lines.length > 0 && (
+						<div className="flex justify-evenly">
+							<ClearTableButton onClear={clearTable} />
+							<ExportPDFButton elementId="invoice-table" />
+						</div>
+					)}
 				</div>
 			</div>
 		</>

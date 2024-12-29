@@ -41,7 +41,7 @@ export default function DarkModeToggle() {
 	return (
 		<button
 			onClick={() => setIsDarkMode((prevMode) => !prevMode)}
-			className="p-2 rounded bg-blue-500 text-white dark:bg-gray-600"
+			className="p-2 rounded-full bg-gray-300 text-white dark:bg-gray-600"
 		>
 			<img
 				src={isDarkMode ? "/icons/sun.png" : "/icons/moon.png"}

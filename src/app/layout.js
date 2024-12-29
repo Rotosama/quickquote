@@ -2,7 +2,6 @@
 import { Geist, Geist_Mono, Monomaniac_One } from "next/font/google";
 import "./globals.css";
 import { useEffect, useState } from "react";
-import DarkModeToggle from "./components/DarkModeToogle";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",

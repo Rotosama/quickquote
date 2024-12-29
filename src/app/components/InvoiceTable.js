@@ -2,7 +2,7 @@
 import ExportPDFButton from "./ExportPDFButton";
 import DeleteLineButton from "./DeleteLineButton";
 
-export default function InvoiceTable({ lines, onEditLine, onDeleteLine }) {
+export default function InvoiceTable({ lines, onDeleteLine }) {
 	const calculateTotal = () =>
 		lines.reduce(
 			(total, line) =>
@@ -12,19 +12,25 @@ export default function InvoiceTable({ lines, onEditLine, onDeleteLine }) {
 
 	return (
 		<div>
-			<ExportPDFButton elementId="invoice-table" fileName="invoice.pdf" />
-			<div id="invoice-table" className="p-4 bg-white shadow-md rounded">
+			<div
+				id="invoice-table"
+				className="p-4 bg-white shadow-md rounded dark:bg-gray-600"
+			>
 				{lines.map((line, index) => (
 					<div
 						key={index}
 						className={`flex justify-between border-b py-2 ml-2 p-10 ${
-							line.isComment ? "bg-yellow-100 p-1" : ""
+							line.isComment
+								? "bg-yellow-100 p-1 dark:bg-teal-800 border-none"
+								: ""
 						}`}
 					>
 						<div>
 							<p
 								className={`font-bold ${
-									line.isComment ? "text-yellow-700" : ""
+									line.isComment
+										? "text-yellow-700 dark:text-teal-400"
+										: ""
 								}`}
 							>
 								{line.description}

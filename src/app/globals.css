@@ -19,7 +19,16 @@ html.dark {
 	--foreground: #d5d5db;
 }
 
+input {
+	background: var(--background);
+	color: var(--foreground);
+}
+
 body {
 	color: var(--foreground);
 	background: var(--background);
+}
+.icon-delete {
+	fill: red;
+	color: red;
 }
