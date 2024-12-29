@@ -20,6 +20,10 @@ export default function Home() {
 	const clearTable = () => {
 		setLines([]);
 	};
+
+	const deleteLine = (lineToDelete) => {
+		setLines(lines.filter((line) => line.id !== lineToDelete.id));
+	};
 	return (
 		<>
 			<div className="flex justify-center p-4">
@@ -36,7 +40,7 @@ export default function Home() {
 				{/* Right Side: Invoice Preview */}
 				<div className="w-full lg:w-1/2 p-4">
 					<h1 className="text-2xl font-bold mb-4">Invoice</h1>
-					<InvoiceTable lines={lines} />
+					<InvoiceTable lines={lines} onDeleteLine={deleteLine} />
 				</div>
 			</div>
 		</>

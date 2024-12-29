@@ -1,7 +1,8 @@
 "use client";
 import ExportPDFButton from "./ExportPDFButton";
+import DeleteLineButton from "./DeleteLineButton";
 
-export default function InvoiceTable({ lines }) {
+export default function InvoiceTable({ lines, onEditLine, onDeleteLine }) {
 	const calculateTotal = () =>
 		lines.reduce(
 			(total, line) =>
@@ -46,6 +47,12 @@ export default function InvoiceTable({ lines }) {
 								</p>
 							</div>
 						)}
+						<div className="flex space-x-2">
+							<DeleteLineButton
+								line={line}
+								onDelete={onDeleteLine}
+							/>
+						</div>
 					</div>
 				))}
 				<div className="mt-4 text-right">

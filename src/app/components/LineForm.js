@@ -1,19 +1,19 @@
 "use client";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function LineForm({ onAddLine }) {
 	const [description, setDescription] = useState("");
 	const [quantity, setQuantity] = useState(1);
-	const [price, setPrice] = useState();
+	const [price, setPrice] = useState(0);
 	const [isFormVisible, setIsFormVisible] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		onAddLine({ description, quantity, price });
+		onAddLine({ id: uuidv4(), description, quantity, price });
 		setDescription("");
 		setQuantity(1);
 		setPrice(0);
-
 		setIsFormVisible(false);
 	};
 
@@ -35,7 +35,6 @@ export default function LineForm({ onAddLine }) {
 						className="w-full border p-2 rounded mb-1"
 						required
 					/>
-					<div className=""></div>
 					<input
 						type="number"
 						placeholder="Quantity"
@@ -54,10 +53,9 @@ export default function LineForm({ onAddLine }) {
 						step="0.01"
 						required
 					/>
-
 					<button
 						type="submit"
-						className="bg-blue-500 text-white px-4 py-2 rounded mt-2 animate-pulse"
+						className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
 					>
 						Add Line
 					</button>
