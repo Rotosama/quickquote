@@ -32,7 +32,7 @@ export default function LineForm({ onAddLine }) {
 						placeholder="Description"
 						value={description}
 						onChange={(e) => setDescription(e.target.value)}
-						className="w-full border p-2 rounded mb-1"
+						className="w-full border border-slate-400 p-2 rounded mb-1"
 						required
 					/>
 					<input
@@ -40,7 +40,7 @@ export default function LineForm({ onAddLine }) {
 						placeholder="Quantity"
 						value={quantity}
 						onChange={(e) => setQuantity(Number(e.target.value))}
-						className="w-full border p-2 rounded mb-1"
+						className="w-full border border-slate-400 p-2 rounded mb-1"
 						min="1"
 						required
 					/>
@@ -49,7 +49,7 @@ export default function LineForm({ onAddLine }) {
 						placeholder="Price"
 						value={price}
 						onChange={(e) => setPrice(Number(e.target.value))}
-						className="w-full border p-2 rounded mb-1"
+						className="w-full border border-slate-400 p-2 rounded mb-1"
 						step="0.01"
 						required
 					/>
