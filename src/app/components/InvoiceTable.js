@@ -42,7 +42,10 @@ export default function InvoiceTable({ lines, onDeleteLine }) {
 									<p className="text-sm text-gray-500 dark:text-gray-400">
 										Price:
 										{line.price === 0 ? (
-											<span className="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 mx-3 rounded-full">
+											<span
+												id="free-pill"
+												className="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 mx-3 rounded-full"
+											>
 												Free
 											</span>
 										) : (

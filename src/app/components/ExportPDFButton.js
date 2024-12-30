@@ -17,11 +17,14 @@ export default function ExportPDFButton({ elementId }) {
 		const fileName = `invoice_${formattedDate}_${formattedTime}.pdf`;
 
 		const opt = {
-			margin: 1,
+			margin: 0.5,
 			filename: fileName,
 			image: { type: "jpeg", quality: 0.98 },
-			html2canvas: { scale: 2 },
-			jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+			html2canvas: {
+				scale: 2,
+				ignoreElements: (element) => element.id === "free-pill",
+			},
+			jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
 		};
 
 		html2pdf()
