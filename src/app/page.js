@@ -1,13 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import LineForm from "./components/LineForm";
 import InvoiceTable from "./components/InvoiceTable";
 import CommentForm from "./components/CommentForm";
-import DarkModeToggle from "./components/DarkModeToogle";
 import ClearTableButton from "./components/ClearTableButton";
-import ExportPDFButton from "./components/ExportPDFButton";
 
+const DarkModeToggle = dynamic(() => import("./components/DarkModeToogle"), {
+	ssr: false,
+});
+const ExportPDFButton = dynamic(() => import("./components/ExportPDFButton"), {
+	ssr: false,
+});
 export default function Home() {
 	const [lines, setLines] = useState([]);
 
