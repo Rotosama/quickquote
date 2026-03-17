@@ -1,78 +1,103 @@
 "use client";
 import DeleteLineButton from "./DeleteLineButton";
 
-export default function InvoiceTable({ lines, onDeleteLine }) {
-	const calculateTotal = () =>
-		lines.reduce(
-			(total, line) =>
-				total + (line.isComment ? 0 : line.quantity * line.price),
-			0
-		);
+export default function InvoiceTable({ lines, onDeleteLine, taxRate = 21, globalDiscount = 0 }) {
+	const subtotal = lines.reduce(
+		(total, line) => total + (line.isComment ? 0 : line.quantity * line.price),
+		0
+	);
+
+	const discountAmount = (subtotal * globalDiscount) / 100;
+	const baseImponible = subtotal - discountAmount;
+	const taxAmount = (baseImponible * taxRate) / 100;
+	const total = baseImponible + taxAmount;
 
 	return (
-		<div>
-			<div
-				id="invoice-table"
-				className="p-4 bg-white shadow-md rounded dark:bg-gray-600"
-			>
-				{lines.map((line, index) => (
-					<div
-						key={index}
-						className={`flex justify-between items-center border-b py-2 ml-2 p-10 ${
-							line.isComment
-								? "bg-yellow-100 p-1 dark:bg-teal-800 border-none"
-								: ""
-						}`}
-					>
-						<div className="flex-1">
-							<p
-								className={`font-bold ${
-									line.isComment
-										? "text-yellow-700 dark:text-teal-400"
-										: ""
-								}`}
-							>
-								{line.description}
-							</p>
+		<div className="w-full">
+			<div className="space-y-1">
+				{/* Table Header */}
+				{lines.some(l => !l.isComment) && (
+					<div className="grid grid-cols-12 gap-4 px-4 py-2 border-b border-border text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+						<div className="col-span-6">Description</div>
+						<div className="col-span-2 text-center">Qty</div>
+						<div className="col-span-2 text-right">Price</div>
+						<div className="col-span-2 text-right px-4">Total</div>
+					</div>
+				)}
+
+				<div className="divide-y divide-border/50">
+					{lines.map((line) => (
+						<div
+							key={line.id}
+							className={`group relative grid grid-cols-12 gap-4 items-center p-4 transition-colors hover:bg-muted/30 ${
+								line.isComment
+									? "bg-primary/5 italic text-primary/80 border-l-4 border-primary/30"
+									: ""
+							}`}
+						>
+							<div className={line.isComment ? "col-span-11" : "col-span-6"}>
+								<p className={`text-sm font-medium ${line.isComment ? 'leading-relaxed text-primary/90' : 'text-foreground'}`}>
+									{line.description}
+								</p>
+							</div>
+
 							{!line.isComment && (
 								<>
-									<p className="text-sm text-gray-500 dark:text-gray-400">
-										Quantity: {line.quantity}
-									</p>
-									<p className="text-sm text-gray-500 dark:text-gray-400">
-										Price:
+									<div className="col-span-2 text-center text-sm text-muted-foreground font-medium">
+										{line.quantity}
+									</div>
+									<div className="col-span-2 text-right text-sm text-muted-foreground font-mono">
 										{line.price === 0 ? (
-											<span
-												id="free-pill"
-												className="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 mx-3 rounded-full"
-											>
-												Free
-											</span>
+											<span className="text-emerald-600 font-bold uppercase text-[10px] tracking-tight">Free</span>
 										) : (
-											`${line.price.toFixed(2)} €`
+											`${line.price.toFixed(2)}€`
 										)}
-									</p>
+									</div>
+									<div className="col-span-2 text-right text-sm font-bold text-foreground font-mono pr-4">
+										{(line.quantity * line.price).toFixed(2)}€
+									</div>
 								</>
 							)}
+
+							<div className="absolute right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+								<DeleteLineButton line={line} onDelete={onDeleteLine} />
+							</div>
 						</div>
-						{!line.isComment && (
-							<div className="flex items-center space-x-2">
-								<p className="font-bold">
-									{(line.quantity * line.price).toFixed(2)} €
-								</p>
-								<DeleteLineButton
-									line={line}
-									onDelete={onDeleteLine}
-								/>
+					))}
+				</div>
+
+				{lines.length > 0 && (
+					<div className="mt-8 pt-8 space-y-3 flex flex-col items-end px-4 border-t border-border/60">
+						<div className="flex justify-between w-full max-w-[280px] text-sm text-muted-foreground">
+							<span className="font-medium">Subtotal</span>
+							<span className="font-mono">{subtotal.toFixed(2)}€</span>
+						</div>
+						
+						{globalDiscount > 0 && (
+							<div className="flex justify-between w-full max-w-[280px] text-sm text-emerald-600 font-medium">
+								<span>Discount ({globalDiscount}%)</span>
+								<span className="font-mono">-{discountAmount.toFixed(2)}€</span>
 							</div>
 						)}
+
+						<div className="flex justify-between w-full max-w-[280px] text-sm text-foreground font-bold">
+							<span>Base Imponible</span>
+							<span className="font-mono">{baseImponible.toFixed(2)}€</span>
+						</div>
+
+						<div className="flex justify-between w-full max-w-[280px] text-sm text-muted-foreground/80">
+							<span className="font-medium">IVA ({taxRate}%)</span>
+							<span className="font-mono">{taxAmount.toFixed(2)}€</span>
+						</div>
+
+						<div className="flex justify-between w-full max-w-[280px] pt-4 mt-2 border-t border-border">
+							<span className="text-xl font-black text-foreground uppercase tracking-tighter">Total</span>
+							<span className="text-2xl font-black text-primary font-mono tracking-tighter tabular-nums">
+								{total.toFixed(2)}€
+							</span>
+						</div>
 					</div>
-				))}
-				<div className="mt-4 text-right">
-					<h2 className="text-lg font-bold">
-						Total: {calculateTotal().toFixed(2)} €
-					</h2>
-				</div>
+				)}
 			</div>
 		</div>
 	);

@@ -1,30 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-	--background: #efefef;
-	--foreground: #0a081f;
-	--font-roboto: "Roboto", sans-serif;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-foreground: #f8fafc;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #1e293b;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #1e293b;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #2563eb;
+  --radius: 0.75rem;
 }
 
-body {
-	color: var(--foreground);
-	background: var(--background);
-	font-family: var(--font-roboto);
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #ffffff;
+  --popover: #0f172a;
+  --popover-foreground: #ffffff;
+  --primary: #3b82f6;
+  --primary-foreground: #020617;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #cbd5e1;
+  --accent: #1e293b;
+  --accent-foreground: #ffffff;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #f8fafc;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: #3b82f6;
 }
 
-html.dark {
-	--background: #0a081f;
-	--foreground: #d5d5db;
+/* Force light theme for PDF exports */
+.pdf-export-mode {
+  --background: #ffffff !important;
+  --foreground: #0f172a !important;
+  --card: #ffffff !important;
+  --card-foreground: #0f172a !important;
+  --border: #e2e8f0 !important;
+  --muted: #f1f5f9 !important;
+  --muted-foreground: #64748b !important;
 }
 
-input {
-	background: var(--background);
-	color: var(--foreground);
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
 }
 
-.icon-delete {
-	fill: red;
-	color: red;
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-blue-600 text-white hover:bg-blue-700 h-10 py-2 px-4 shadow-sm;
+  }
+  
+  .glass-card {
+    @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg rounded-xl;
+  }
+
+  .input-field {
+    @apply flex h-10 w-full rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-3 py-2 text-sm placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 dark:bg-slate-800 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-300 dark:bg-slate-700;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
 }

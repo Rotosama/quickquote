@@ -1,18 +1,6 @@
 "use client";
-import { Geist, Roboto } from "next/font/google";
 import "./globals.css";
 import { useEffect, useState } from "react";
-
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const roboto = Roboto({
-	variable: "--font-roboto",
-	subsets: ["latin"],
-	weight: "400",
-});
 
 export default function RootLayout({ children }) {
 	const [isDarkMode, setIsDarkMode] = useState(false);
@@ -51,9 +39,7 @@ export default function RootLayout({ children }) {
 
 	return (
 		<html lang="en" className={isDarkMode ? "dark" : ""}>
-			<body
-				className={`${geistSans.variable} ${roboto.variable} antialiased`}
-			>
+			<body className="antialiased min-h-screen">
 				{children}
 			</body>
 		</html>
