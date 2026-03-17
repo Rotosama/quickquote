@@ -150,7 +150,10 @@ export default function Home() {
 
 					{/* Right Side: Invoice Preview */}
 					<section className="lg:col-span-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-						<div id="invoice-preview" className="bg-card shadow-2xl rounded-2xl overflow-hidden border border-border min-h-[900px] flex flex-col">
+						<div id="invoice-preview" className="bg-card shadow-2xl rounded-2xl overflow-hidden border border-border min-h-[900px] flex flex-col relative">
+							{/* PDF Decorative Accent Bar (Visible only in PDF mode via CSS/Class) */}
+							<div className="hidden pdf-only-block h-2 bg-primary w-full absolute top-0 left-0" />
+							
 							{/* Invoice Header */}
 							<div className="p-10 border-b border-border bg-muted/20">
 								<div className="flex justify-between items-start mb-12">
@@ -189,7 +192,7 @@ export default function Home() {
 								<div className="grid grid-cols-2 gap-12">
 									<div className="space-y-3">
 										<p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary underline decoration-2 underline-offset-4">Emitter</p>
-										<div className="space-y-1">
+										<div className="space-y-1 address-block">
 											<p className="font-bold text-lg leading-none">{businessData.emitter.name || "Your Business Name"}</p>
 											<p className="text-sm font-medium text-muted-foreground">{businessData.emitter.cif || "Tax ID: 00000000X"}</p>
 											<p className="text-sm text-foreground/80 whitespace-pre-wrap leading-relaxed">{businessData.emitter.address || "Your Address\nCity, Country"}</p>
@@ -198,7 +201,7 @@ export default function Home() {
 									</div>
 									<div className="space-y-3">
 										<p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground decoration-2 underline-offset-4">Bill To</p>
-										<div className="space-y-1">
+										<div className="space-y-1 address-block">
 											<p className="font-bold text-lg leading-none">{businessData.client.name || "Client Name / Company"}</p>
 											<p className="text-sm font-medium text-muted-foreground">{businessData.client.cif || "Client Tax ID"}</p>
 											<p className="text-sm text-foreground/80 whitespace-pre-wrap leading-relaxed">{businessData.client.address || "Client Address\nCity, Country"}</p>
@@ -229,6 +232,19 @@ export default function Home() {
 								<div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
 									<p>QuickQuote &copy; {new Date().getFullYear()} Invoicing System</p>
 									{isMounted && <p>Document Auth Code: {uuidv4().split('-')[0].toUpperCase()}</p>}
+								</div>
+								
+								{/* Professional PDF-Only Footer */}
+								<div className="hidden pdf-only-block pdf-footer mt-8">
+									<div className="flex justify-between items-start">
+										<div className="space-y-1">
+											<p className="font-bold">Legal Notice</p>
+											<p className="max-w-md">This document is a pro-forma invoice and does not constitute a formal tax invoice. Please refer to the final invoice for tax purposes. Payment implies acceptance of the terms and conditions.</p>
+										</div>
+										<div className="text-right italic">
+											<p>Page 1 of 1</p>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

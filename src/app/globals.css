@@ -52,12 +52,49 @@
 /* Force light theme for PDF exports */
 .pdf-export-mode {
   --background: #ffffff !important;
-  --foreground: #0f172a !important;
+  --foreground: #020617 !important;
   --card: #ffffff !important;
-  --card-foreground: #0f172a !important;
-  --border: #e2e8f0 !important;
-  --muted: #f1f5f9 !important;
-  --muted-foreground: #64748b !important;
+  --card-foreground: #020617 !important;
+  --border: #cad4e0 !important;
+  --muted: #f8fafc !important;
+  --muted-foreground: #475569 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.pdf-export-mode #invoice-preview {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Professional zebra striping for PDF */
+.pdf-export-mode .group:nth-child(even) {
+  @apply bg-slate-50/50;
+}
+
+/* Visibility control for PDF-specific elements */
+.pdf-only-block {
+  display: none !important;
+}
+
+.pdf-export-mode .pdf-only-block {
+  display: block !important;
+}
+
+/* Address wrapping and spacing for PDF */
+.pdf-export-mode .address-block {
+  max-width: 250px;
+  line-height: 1.5;
+}
+
+/* Footer styling for PDF */
+.pdf-export-mode .pdf-footer {
+  border-top: 1px solid #cad4e0 !important;
+  padding-top: 1rem !important;
+  margin-top: auto !important;
+  font-size: 8px !important;
+  color: #64748b !important;
 }
 
 @layer base {
